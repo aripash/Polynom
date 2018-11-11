@@ -118,7 +118,13 @@ public class Monom implements function{
 		this.set_coefficient(this.get_coefficient()*m.get_coefficient());
 		this.set_power(this.get_power()+m.get_power());
 	}
-
+	/**
+	 * checks if the monom has 0 in the coefficient
+	 * @return true if the monom is zero false else wise
+	 */
+	public boolean isZero() {
+		return	(this.get_coefficient()==0) ;
+	}
 	//****************** Private Methods and Data *****************
 
 	private void set_coefficient(double a){

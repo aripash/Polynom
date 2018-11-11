@@ -15,7 +15,9 @@ public class Monom_Comperator implements Comparator<Monom> {
 	 */
 public int compare(Monom arg0, Monom arg1) {
 		int p= arg0.get_power()-arg1.get_power();
-		if(p==0)return (int) (arg0.get_coefficient()-arg1.get_coefficient());
+		if(p==0) {
+			return (int) ((arg0.get_coefficient()-arg1.get_coefficient())*10);
+		}
 		return p;
 	}
 }

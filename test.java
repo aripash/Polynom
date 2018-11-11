@@ -22,7 +22,7 @@ public class test {
 		p.add(new Monom(2,1));
 		p.add(new Monom(1,2));
 		System.out.println(p);
-		Polynom p2=new Polynom(" 1, x, x^2,2*x, 2x,2*x^2, 2x^2,-x,-2x,2X^3,-3*x^2");
+		Polynom p2=new Polynom(" (0), [x], {0x^2,2*x}, 2x,2*x^2, 2x^2,-x,-2x,2X^3,-3*x^2") ;
 		System.out.println(p2);
 		Polynom p4=new Polynom(" 1+ x+ x^2+2*x+ 2x+2*x^2+ 2x^2-x-2x+2X^3-3*x^2");
 		System.out.println(p4);

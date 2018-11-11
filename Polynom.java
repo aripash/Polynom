@@ -16,7 +16,7 @@ import myMath.Monom;
  */
 public class Polynom implements Polynom_able{
 	// ********** add your code below ***********
-	ArrayList<Monom> polyList=new ArrayList<Monom>();
+	private ArrayList<Monom> polyList=new ArrayList<Monom>();
 	/**
 	 * empty constructor
 	 */
@@ -38,6 +38,7 @@ public class Polynom implements Polynom_able{
 		s=s.replaceAll("[,]", "+");
 		s=s.replaceAll("[-]", "+-");
 		s=s.replaceAll("[+]"+"[+]", "+");
+		s=s.replaceAll("[\\[\\](){}]", "");
 		if(s.charAt(0)=='+')s=s.substring(1, s.length());
 		String [] str=s.split("[+]");
 		for(int i=0;i<str.length;i++) {
@@ -50,21 +51,23 @@ public class Polynom implements Polynom_able{
 	 */
 	public void add(Monom m1) {
 		int pow=m1.get_power();
-		Iterator<Monom> i=this.iteretor();
-		boolean flag=false;
-		while(i.hasNext()&&!flag) {
-			Monom mon=i.next();
-			if(mon.get_power()==pow) {
-				mon.add(m1);
-				if(mon.get_coefficient()==0)polyList.remove(mon);
-				flag=true;
+		if(pow>=0&&m1.get_coefficient()!=0) {
+			Iterator<Monom> i=this.iteretor();
+			boolean flag=false;
+			while(i.hasNext()&&!flag) {
+				Monom mon=i.next();
+				if(mon.get_power()==pow) {
+					mon.add(m1);
+					flag=true;
+				}
 			}
-		}
-		if(!flag) {
-			polyList.add(m1);
+			if(!flag) {
+				polyList.add(m1);
+				this.sort();
+			}
 			this.sort();
-		}
-	}	
+		}	
+	}
 	/**
 	 * adds a class that implaments polynom_able to the polynom
 	 * @param p1 the added class
@@ -195,17 +198,17 @@ public class Polynom implements Polynom_able{
 	 */
 	public double area(double x0, double x1, double eps) {
 		if(eps<=0) eps=Math.abs(eps);
-			if(x0<=x1) {
-				double area=0;
-				for(double x=x0;x<(x1-eps);x+=eps) {
-					double y=this.f(x);
-					if(y>0) {
-						area+=(eps*y);
-					}
+		if(x0<=x1) {
+			double area=0;
+			for(double x=x0;x<(x1-eps);x+=eps) {
+				double y=this.f(x);
+				if(y>0) {
+					area+=(eps*y);
 				}
-				return area;
 			}
-			else return this.area(x1, x0, eps);
+			return area;
+		}
+		else return this.area(x1, x0, eps);
 	}
 	/**
 	 * creates iterator for the list of polynoms
@@ -219,13 +222,40 @@ public class Polynom implements Polynom_able{
 	 * @return string that represents the polynom
 	 */
 	public String toString() {
-		return  polyList+" ";
+		this.sort();
+		String s="";
+		if (this.getArrayList().isEmpty()) 
+			s=s+"0";
+		else {
+			Iterator<Monom> it=this.iteretor();
+			while (it.hasNext())
+			{
+				Monom m=new Monom (it.next());
+				s=s+m.toString()+" + ";
+			}
+			s=s.substring(0, s.length()-3);
+		}
+		return s;
+	}
+	/**
+	 * get function for the list of polynom
+	 * @return arraylist of monoms 
+	 */
+	public ArrayList<Monom> getArrayList() {
+		return this.polyList;
 	}
 	/**
 	 * sorts the list of monoms in polynom
 	 */
 	public void sort() {
 		polyList.sort(new Monom_Comperator());
+		Iterator<Monom> it=this.iteretor();
+		if (!this.isZero()) {
+			while (it.hasNext()) {
+				Monom m=new Monom(it.next());
+				if(m.isZero()) it.remove();
+			}
+		}
 	}
 
 }

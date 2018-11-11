@@ -13,10 +13,11 @@ Built With
 eclipse
 
 Version
-1.0
+1.1
 
 Authors
-Denis
+Denis Shapira
+Mark Michaely
 
 License
 none
