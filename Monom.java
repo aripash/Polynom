@@ -96,8 +96,11 @@ public class Monom implements function{
 	public String toString() {
 		String ans="";
 		if 		(this.isZero()) ans=ans+0;
-		else 	if(this.get_power()==1) ans=this.get_coefficient()+"x";
-		else 	ans=this.get_coefficient()+"x^"+this.get_power();
+		else 	{
+			ans+=this.get_coefficient();
+			if(this.get_power()>0) ans+="x";
+			if(this.get_power()>1) ans+="^"+this.get_power();
+		}
 		return ans;
 	}
 	/**
