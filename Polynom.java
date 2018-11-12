@@ -88,7 +88,7 @@ public class Polynom implements Polynom_able{
 		Iterator<Monom> i=this.iteretor();
 		double ans=0;
 		while(i.hasNext()) {
-			ans=i.next().f(x);
+			ans+=i.next().f(x);
 		}
 		return ans;
 	}
@@ -155,7 +155,7 @@ public class Polynom implements Polynom_able{
 		if(eps!=0) {
 		if(eps<0) eps=Math.abs(eps);
 		if(x0<=x1) {
-			for(double x=x0;x<x1;x+=eps) {
+			for(double x=x0;x<=x1;x+=eps) {
 				if(Math.abs(this.f(x))<=eps)return x;
 			}
 			throw new RuntimeException("No root");

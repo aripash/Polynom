@@ -14,7 +14,7 @@ public class Monom_Comperator implements Comparator<Monom> {
 	 * @return positive number if args0 is bigger negetive if smaller and 0 if they are the same
 	 */
 public int compare(Monom arg0, Monom arg1) {
-		int p= arg0.get_power()-arg1.get_power();
+		int p= -(arg0.get_power()-arg1.get_power());
 		if(p==0) {
 			if(arg0.get_coefficient()-arg1.get_coefficient()>0)return 1;
 			if(arg0.get_coefficient()-arg1.get_coefficient()<0)return -1;

@@ -8,12 +8,13 @@ none
 
 Running the tests
 the tests are in main and they check every function in the project with correct inputs
+added junit to test polynom and monom
 
 Built With
 eclipse
 
 Version
-1.11
+1.2
 
 Authors
 Denis Shapira

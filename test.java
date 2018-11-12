@@ -46,7 +46,7 @@ public class test {
 		System.out.println(p3+" after multiply");
 		System.out.println("equals? "+p.equals(p3));
 		System.out.println("root "+p.root(-1, 2, 0.01));
-		System.out.println("root "+p.root(-1, 1, 0.000001));
+		System.out.println("root "+p.root(-1, 3, 0.0001));
 		System.out.println(p3.derivative()+" after derivative");
 		System.out.println(p+" after derivative");
 		System.out.println("area "+p.area(-1, 1, 0.00001));				
