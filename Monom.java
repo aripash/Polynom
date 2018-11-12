@@ -31,6 +31,7 @@ public class Monom implements function{
 	 * @param s the string of the monom
 	 */
 	public Monom(String s) {
+		s=s.toLowerCase();
 		double a;
 		int b;
 		if(s.contains("x")) {
@@ -48,7 +49,7 @@ public class Monom implements function{
 			else {
 				a=1;
 			}
-			
+
 			if(s.contains("^")) {
 				if(s.charAt(s.indexOf('^'))+1=='-') throw new RuntimeException("No negative integer"); 
 				else b=Integer.parseInt(s.substring(s.indexOf("^")+1, s.length()));
@@ -93,7 +94,11 @@ public class Monom implements function{
 	 * @return string in the form of a*x^b
 	 */
 	public String toString() {
-		return   _coefficient + "*X^" + _power;
+		String ans="";
+		if 		(this.isZero()) ans=ans+0;
+		else 	if(this.get_power()==1) ans=this.get_coefficient()+"x";
+		else 	ans=this.get_coefficient()+"x^"+this.get_power();
+		return ans;
 	}
 	/**
 	 * this function implements the f'(x) function
@@ -108,7 +113,7 @@ public class Monom implements function{
 	 */
 	public void add(Monom m) {
 		if(m.get_power()==this.get_power())
-		this.set_coefficient(this.get_coefficient()+m.get_coefficient());
+			this.set_coefficient(this.get_coefficient()+m.get_coefficient());
 	}
 	/**
 	 * this function multiplies this monom with m
