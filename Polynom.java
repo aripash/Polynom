@@ -152,7 +152,8 @@ public class Polynom implements Polynom_able{
 	 * @return the number that turns the polynom to zero
 	 */
 	public double root(double x0, double x1, double eps) {
-		if(eps<=0) eps=Math.abs(eps);
+		if(eps!=0) {
+		if(eps<0) eps=Math.abs(eps);
 		if(x0<=x1) {
 			for(double x=x0;x<x1;x+=eps) {
 				if(Math.abs(this.f(x))<=eps)return x;
@@ -160,6 +161,8 @@ public class Polynom implements Polynom_able{
 			throw new RuntimeException("No root");
 		}
 		return this.root(x1, x0, eps);
+	}
+		throw new RuntimeException("eps is zero");
 	}
 	/**
 	 * copying polynom this
@@ -197,7 +200,8 @@ public class Polynom implements Polynom_able{
 	 * @return the desired area
 	 */
 	public double area(double x0, double x1, double eps) {
-		if(eps<=0) eps=Math.abs(eps);
+		if(eps!=0) {
+		if(eps<0) eps=Math.abs(eps);
 		if(x0<=x1) {
 			double area=0;
 			for(double x=x0;x<(x1-eps);x+=eps) {
@@ -209,6 +213,8 @@ public class Polynom implements Polynom_able{
 			return area;
 		}
 		else return this.area(x1, x0, eps);
+	}
+	throw new RuntimeException("eps is zero");
 	}
 	/**
 	 * creates iterator for the list of polynoms
