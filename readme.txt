@@ -13,8 +13,11 @@ added junit to test polynom and monom
 Built With
 eclipse
 
+Resources
+Xchart		https://knowm.org/open-source/xchart/
+
 Version
-1.2
+1.21
 
 Authors
 Denis Shapira
