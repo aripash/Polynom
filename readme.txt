@@ -1,23 +1,24 @@
 
 Ex0
-this project implements polynom and it's functions
-the polynom is made out of monoms
+this project implements polynom and it's functions.
+the polynom is made out of monoms.
+prints a graph for polynom.
 
 Prerequisites
-none
+Xchart jar.
 
 Running the tests
-the tests are in main and they check every function in the project with correct inputs
-added junit to test polynom and monom
+the tests are in main and they check every function in the project with correct inputs.
+added junit to test polynom and monom.
 
 Built With
-eclipse
+eclipse.
 
 Resources
 Xchart		https://knowm.org/open-source/xchart/
 
 Version
-1.21
+1.22
 
 Authors
 Denis Shapira
