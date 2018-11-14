@@ -32,7 +32,7 @@ public class GraphIt {
 				if(Math.abs(temp.f(x))<=eps) {
 					a[i]=x;
 					i++;
-					x=x+(eps*2);
+					x++;
 				}
 			}
 			from+=10;
@@ -43,19 +43,19 @@ public class GraphIt {
 	}
 	public void graph() {
 		double [] extremum=this.extremum();
-		double [] xData=new double[extremum.length*2+1];
-		int j=0;
-		xData[0]=extremum[0]-5;
-		for(int i=1;i<xData.length-1;i++) {
-			if(i%2==1) {
-				xData[i]=extremum[j];
-			}
-			if(i%2==0) {
-				xData[i]=(extremum[j]+extremum[j+1])/2;
-				j++;
-			}
+		ArrayList <Double> x=new ArrayList<Double>();
+		for(int i=0;i<extremum.length;i++) {
+			x.add(extremum[i]);
 		}
-		xData[xData.length-1]=extremum[extremum.length-1]+5;
+		for(double i=extremum[0]-3;i<extremum[extremum.length-1]+3;i+=0.01) {
+			x.add(i);
+		}
+		x.sort(new dComparator());
+		double [] xData=new double[x.size()];
+		Iterator<Double> inte=x.iterator();
+		for(int i=0;i<x.size();i++) {
+			xData[i]=inte.next();
+		}
 		double [] yData=new double[xData.length];
 		for(int i=0;i<yData.length;i++) {
 			yData[i]=pol.f(xData[i]);

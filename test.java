@@ -50,7 +50,7 @@ public class test {
 		System.out.println(p3.derivative()+" after derivative");
 		System.out.println(p+" after derivative");
 		System.out.println("area "+p.area(-1, 1, 0.00001));				*/
-		GraphIt hope=new GraphIt("x^4-4x^2+4x-7");
+		GraphIt hope=new GraphIt("x^2-4x+4");
 		double[]a=hope.extremum();
 		for(int i=0;i<a.length;i++)System.out.print(a[i]+", ");
 		System.out.println();
