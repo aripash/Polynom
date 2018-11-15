@@ -24,7 +24,7 @@ public class GraphIt {
 			double x2=from;
 			while(x<=to) {
 				try {
-					a[i]=pol.root(x, x+1, eps);
+					a[i]=temp.root(x, x+1, eps);
 					x+=a[i]+eps;
 					i++;
 				}
@@ -32,7 +32,7 @@ public class GraphIt {
 					x++;
 				}
 				try {
-					a[i]=pol.root((x2*-1), ((x2+1)*-1), eps);
+					a[i]=temp.root((x2*-1), ((x2+1)*-1), eps);
 					x2+=Math.abs(a[i])+eps;
 					i++;
 				}
@@ -52,7 +52,7 @@ public class GraphIt {
 		for(int i=0;i<extremum.length;i++) {
 			x.add(extremum[i]);
 		}
-		for(double i=extremum[0]-10;i<extremum[extremum.length-1]+10;i+=0.1) {
+		for(double i=extremum[0]-5;i<extremum[extremum.length-1]+5;i+=0.1) {
 			x.add(i);
 		}
 		x.sort(new dComparator());
