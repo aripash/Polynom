@@ -10,49 +10,40 @@ public class GraphIt {
 	public GraphIt(String s) {
 		pol=new Polynom(s);
 	}
-	public double[] extremum() {
+	public double[] extremum(double from,double to) {
 		Iterator<Monom> im=pol.iteretor();
 		int size=im.next().get_power()-1;
 		double []a=new double[size];
 		Polynom temp=(Polynom)pol.derivative();
 		int i=0;
 		double eps=0.001;
-		double from=0;
-		double to=10;
-		while(i<size) {
-			double x=from;
-			double x2=from;
-			while(x<=to) {
-				try {
-					a[i]=temp.root(x, x+1, eps);
-					x+=a[i]+eps;
-					i++;
-				}
-				catch(Exception e) {
-					x++;
-				}
-				try {
-					a[i]=temp.root((x2*-1), ((x2+1)*-1), eps);
-					x2+=Math.abs(a[i])+eps;
-					i++;
-				}
-				catch(Exception e2) {
-					x2++;
-				}
+		Boolean flag=true;
+		while(flag) {
+			try {
+				a[i]=temp.root(from, to, eps);
+				from=a[i]+eps*10;
+				i++;
 			}
-			from=to;
-			to+=10;
+			catch(Exception e) {
+				flag=false;
+			}
 		}
-		this.sort(a);
+		if(a.length!=i) {
+			double[]k=new double[i];
+			for(int j=0;j<i;j++) {
+				k[j]=a[j];
+			}
+			return k;
+		}
 		return a;
 	}
-	public void graph() {
-		double [] extremum=this.extremum();
+	public void graph(double a,double b) {
+		double [] extremum=this.extremum(a,b);
 		ArrayList <Double> x=new ArrayList<Double>();
 		for(int i=0;i<extremum.length;i++) {
 			x.add(extremum[i]);
 		}
-		for(double i=extremum[0]-5;i<extremum[extremum.length-1]+5;i+=0.1) {
+		for(double i=a;i<b;i+=0.1) {
 			x.add(i);
 		}
 		x.sort(new dComparator());
@@ -66,6 +57,12 @@ public class GraphIt {
 			yData[i]=pol.f(xData[i]);
 		}
 		XYChart chart = QuickChart.getChart("Polynom", "X", "Y", "Polynom \n"+pol.toString(), xData, yData);
+		for(int i=0;i<extremum.length;i++) {
+			double [] xpoint= {extremum[i]};
+			double calc=pol.f(extremum[i]);
+			double [] ypoint= {calc};
+			chart.addSeries("("+((int)(extremum[i]*100))/100.0+","+((int)(calc*100))/100.0+")", xpoint, ypoint);
+		}
 		new SwingWrapper(chart).displayChart();
 	}
 	public void sort(double []a) {
