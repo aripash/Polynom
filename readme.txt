@@ -18,7 +18,7 @@ Resources
 Xchart		https://knowm.org/open-source/xchart/
 
 Version
-1.23
+1.3
 
 Authors
 Denis Shapira

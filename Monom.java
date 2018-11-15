@@ -87,7 +87,7 @@ public class Monom implements function{
 	 */
 	public double f(double x) {
 		x=Math.pow(x, this.get_power());
-		return x*this.get_coefficient();
+		return (x*this.get_coefficient());
 	} 
 	/**
 	 * this is the toString of the monom
@@ -107,8 +107,14 @@ public class Monom implements function{
 	 * this function implements the f'(x) function
 	 */
 	public void derivative() {
-		this.set_coefficient(this.get_coefficient()*this.get_power());
-		this.set_power(this.get_power()-1);
+		if(this.get_power()!=0) {
+			this.set_coefficient(this.get_coefficient()*this.get_power());
+			this.set_power(this.get_power()-1);
+		}
+		else {
+			this.set_power(0);
+			this.set_coefficient(0);
+		}
 	}
 	/**
 	 * this function adds m's coefficient to this's if their power is the same

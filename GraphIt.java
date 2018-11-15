@@ -16,26 +16,31 @@ public class GraphIt {
 		double []a=new double[size];
 		Polynom temp=(Polynom)pol.derivative();
 		int i=0;
-		double eps=0.00001;
+		double eps=0.001;
 		double from=0;
 		double to=10;
-		double x=from;
-		while(i<size&&Math.abs(x)<to) {
-			for(;x<=to;x+=eps) {
-				if(Math.abs(temp.f(x))<=eps) {
-					a[i]=x;
+		while(i<size) {
+			double x=from;
+			double x2=from;
+			while(x<=to) {
+				try {
+					a[i]=pol.root(x, x+1, eps);
+					x+=a[i]+eps;
 					i++;
+				}
+				catch(Exception e) {
 					x++;
 				}
-			}
-			for( x=(from*-1);x<=(to*-1);x+=eps) {
-				if(Math.abs(temp.f(x))<=eps) {
-					a[i]=x;
+				try {
+					a[i]=pol.root((x2*-1), ((x2+1)*-1), eps);
+					x2+=Math.abs(a[i])+eps;
 					i++;
-					x++;
+				}
+				catch(Exception e2) {
+					x2++;
 				}
 			}
-			from+=10;
+			from=to;
 			to+=10;
 		}
 		this.sort(a);
@@ -47,7 +52,7 @@ public class GraphIt {
 		for(int i=0;i<extremum.length;i++) {
 			x.add(extremum[i]);
 		}
-		for(double i=extremum[0]-3;i<extremum[extremum.length-1]+3;i+=0.01) {
+		for(double i=extremum[0]-10;i<extremum[extremum.length-1]+10;i+=0.1) {
 			x.add(i);
 		}
 		x.sort(new dComparator());
@@ -60,7 +65,7 @@ public class GraphIt {
 		for(int i=0;i<yData.length;i++) {
 			yData[i]=pol.f(xData[i]);
 		}
-		XYChart chart = QuickChart.getChart("Polynom", "X", "Y", "y(x)", xData, yData);
+		XYChart chart = QuickChart.getChart("Polynom", "X", "Y", "Polynom \n"+pol.toString(), xData, yData);
 		new SwingWrapper(chart).displayChart();
 	}
 	public void sort(double []a) {
@@ -74,5 +79,14 @@ public class GraphIt {
 				}
 			}
 		}
+	}
+	public double area(int a,int b) {
+		double eps=0.01;
+		double ans=0;
+		for(double i=a;i<b;i+=eps) {
+			double calc=pol.f(i);
+			if(calc<0)ans+=calc;
+		}
+		return ans;
 	}
 }

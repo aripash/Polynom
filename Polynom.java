@@ -153,15 +153,17 @@ public class Polynom implements Polynom_able{
 	 */
 	public double root(double x0, double x1, double eps) {
 		if(eps!=0) {
-		if(eps<0) eps=Math.abs(eps);
-		if(x0<=x1) {
-			for(double x=x0;x<=x1;x+=eps) {
-				if(Math.abs(this.f(x))<=eps)return x;
+			if(eps<0) eps=Math.abs(eps);
+			if(x0<=x1) {
+				double x=x0;
+				while(x<x1){
+					if(Math.abs(this.f(x))<=(eps*10))return x;
+					else x+=eps;
+				}
+				throw new RuntimeException("no root");
 			}
-			throw new RuntimeException("No root");
+			return this.root(x1, x0, eps);
 		}
-		return this.root(x1, x0, eps);
-	}
 		throw new RuntimeException("eps is zero");
 	}
 	/**
@@ -190,6 +192,7 @@ public class Polynom implements Polynom_able{
 			m.derivative();
 			pol.add(m);
 		}
+		this.sort();
 		return pol;
 	}
 	/**
@@ -201,20 +204,20 @@ public class Polynom implements Polynom_able{
 	 */
 	public double area(double x0, double x1, double eps) {
 		if(eps!=0) {
-		if(eps<0) eps=Math.abs(eps);
-		if(x0<=x1) {
-			double area=0;
-			for(double x=x0;x<(x1-eps);x+=eps) {
-				double y=this.f(x);
-				if(y>0) {
-					area+=(eps*y);
+			if(eps<0) eps=Math.abs(eps);
+			if(x0<=x1) {
+				double area=0;
+				for(double x=x0;x<(x1-eps);x+=eps) {
+					double y=this.f(x);
+					if(y>0) {
+						area+=(eps*y);
+					}
 				}
+				return area;
 			}
-			return area;
+			else return this.area(x1, x0, eps);
 		}
-		else return this.area(x1, x0, eps);
-	}
-	throw new RuntimeException("eps is zero");
+		throw new RuntimeException("eps is zero");
 	}
 	/**
 	 * creates iterator for the list of polynoms
