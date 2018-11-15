@@ -55,6 +55,6 @@ public class test {
 		for(int i=0;i<a.length;i++)System.out.print(a[i]+", ");
 		System.out.println();
 		System.out.println(hope.area(-2, 6));
-		hope.graph(-2,6);													
+		hope.graph(-10,10);													
 	}
 }

@@ -29,13 +29,6 @@ public class GraphIt {
 		this.setPol(p);
 	}
 	/**
-	 * this function is used to find the extremes of polynom function
-	 * @param from is the parameter 
-	 * @param to
-	 * @return
-	 */
-	
-	/**
 	 * function is used to get an array of doubles which represents extremes in the graph
 	 * @param from is the start of the search
 	 * @param to is the end of the search

@@ -5,7 +5,7 @@ package myMath;
 import java.util.Comparator;
 /**
  * this is the function that compares two doubles
- * @return positive number if arg1 is bigger, negetive if arg1 is smaller and 0 if both args are the same.
+ * @return positive number if arg1 is bigger, negative if arg1 is smaller and 0 if both args are the same.
  *
  */
 public class dComparator implements Comparator<Double>{
